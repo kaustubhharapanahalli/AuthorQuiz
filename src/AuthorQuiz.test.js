@@ -72,4 +72,23 @@ describe("Author Quiz", () => {
       );
     });
   });
+
+  describe("When the first answer has been selected", () => {
+    let wrapper;
+    const handleAnswerSelected = jest.fn();
+    beforeAll(() => {
+      wrapper = mount(
+        <AuthorQuiz {...state} onAnswerSelected={handleAnswerSelected} />
+      );
+      wrapper.find(".answer").first().simulate("click");
+    });
+
+    it("onAnswerSelected function should be called", () => {
+      expect(handleAnswerSelected).toHaveBeenCalled();
+    });
+
+    it("should receive The Shining", () => {
+      expect(handleAnswerSelected).toHaveBeenCalledWith("The Shining");
+    });
+  });
 });
